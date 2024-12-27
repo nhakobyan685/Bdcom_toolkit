@@ -76,6 +76,7 @@ def change_password(ip):
     finally:
         driver.close()
         driver.quit()
+        sys.exit()
     
 def mass_pass_change(ip_file):
     """ Changin password with based ip list """
@@ -86,10 +87,13 @@ def mass_pass_change(ip_file):
             ip_list = file.readlines()
     except FileNotFoundError: 
         print('[*] File not found [*]')
+        sys.exit()
     except FileExistsError:
         print('[*] File not exist [*]')
+        sys.exit()
     except (UnicodeEncodeError, UnicodeError, UnicodeDecodeError):
         print('[*] Working only UTF-8 files [*]')
+        sys.exit()
 
 
     #iter on ip lists and change massive ONU password
@@ -119,6 +123,7 @@ def main():
             mass_pass_change(args.file)
     except KeyboardInterrupt:
         print('[*] User stoped program [*]')
+        sys.exit()
 
 
 #Call function
